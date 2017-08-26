@@ -9,9 +9,19 @@ import datetime
 from datetime import date
 import shutil
 import logging
+import sys
 
-root = "ROOT"
-internal = "INTERNAL"
+if len(sys.argv) == 1:
+    root = "ROOT"
+    internal = "INTERNAL"
+elif len(sys.argv) == 3:
+    root = sys.argv[1]
+    internal = sys.argv[2]
+else:
+    print("Nemam dostatek argumentu k provedeni.")
+    exit()
+
+
 logging.basicConfig(level=logging.DEBUG)
 
 for folder in os.listdir(root):
