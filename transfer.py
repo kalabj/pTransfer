@@ -12,17 +12,26 @@ import logging
 import sys
 
 if len(sys.argv) == 1:
-    root = "ROOT"
-    internal = "INTERNAL"
+    print("Prosim, vlozte dva argumenty.")
+    exit(1)
+elif sys.argv[1] == "--help":
+    print("Vlozte dva argumenty - 1. cesta ke slozce na sdilenem disku, 2. cesta ke slozce na internim disku")
+    exit(0)
 elif len(sys.argv) == 3:
     root = sys.argv[1]
     internal = sys.argv[2]
 else:
-    print("Nemam dostatek argumentu k provedeni.")
-    exit()
-
+    print("Vlozte dva argumenty.")
+    exit(1)
 
 logging.basicConfig(level=logging.DEBUG)
+
+if not os.path.exists(root):
+    print("Zadana cesta na sdilenem disku neexistuje.")
+    exit(1)
+if not os.path.exists(internal):
+    print("Zadana cesta na internim disku neexistuje.")
+    exit(1)
 
 for folder in os.listdir(root):
     section = os.path.join(root, folder)
